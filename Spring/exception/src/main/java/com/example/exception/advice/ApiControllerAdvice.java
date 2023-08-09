@@ -34,7 +34,7 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest httpServletRequest){
-
+        // HttpServletRequest : HTTP 요청 메시지를 파싱해서 객체 필드에 저장 해두었다가 특정 메서드를 활용하여 파싱된 HTTP의 헤더, 데이터를 읽어 올 수 있음
         List<Error> errorList = new ArrayList<>();
 
         BindingResult bindingResult = e.getBindingResult();

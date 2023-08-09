@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 @RestController
 @RequestMapping("/api/user")
-@Validated
+@Validated  // AOP 기반으로 메소드의 요청을 가로채서 유효성 검증을 진행해주는 어노테이션, 검증할 메소드의 파라미터에 @Valid를 붙여주면 유효성 검사 진행
 public class ApiController {
 
     @GetMapping("")
