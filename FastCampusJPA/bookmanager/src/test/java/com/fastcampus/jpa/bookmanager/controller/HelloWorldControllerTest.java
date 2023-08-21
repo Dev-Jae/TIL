@@ -31,9 +31,9 @@ class HelloWorldControllerTest {
     @Test
     void helloWorld() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.get("/hello-world"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello-world"));
+                .andDo(print())                 // MockMvcResultHandlers.print() : 요청에 대한 응답을 콘솔에 출력
+                .andExpect(status().isOk())     // MockMvcResultMatchers.status().isOk() : status 코드가 200임을 확인
+                .andExpect(content().string("hello-world"));    // MockMvcResultMatchers.content().string("~")  // 결과읜 컨텐트가 string형 ~임음 확인
     }
 
 }
