@@ -30,6 +30,18 @@ class UserRepositoryTest {
 
     @Test
     void crud(){    // create, read, update, delete
+
+        // update
+        userRepository.save(new Users("david", "david@gmail.com"));
+
+        Users user = userRepository.findById(1L).orElse(null);
+        user.setEmail("dev-update@gmail.com");
+
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+
+
+        /*
         userRepository.findAll().forEach(System.out::println);
         ExampleMatcher matcher = ExampleMatcher.matching()  // 예제 엔터티 인스턴스를 기반으로 쿼리를 실행할 수있는 쿼리 생성 방법, SQL쿼리에서 LIKE와 같은 문이라 생각하면됨
                 .withIgnorePaths("id")
@@ -38,6 +50,7 @@ class UserRepositoryTest {
 
         Example<Users> example = Example.of(new Users("ja", "naver.com"), matcher);
         userRepository.findAll(example).forEach(System.out::println);
+        */
 
         /*
         // 페이징
