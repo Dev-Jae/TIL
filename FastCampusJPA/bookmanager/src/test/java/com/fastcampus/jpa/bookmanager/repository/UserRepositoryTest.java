@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,39 @@ class UserRepositoryTest {
     private UserRepository userRepository;  // 의존성 추가
 
     @Test
+    void select(){
+/*        System.out.println(userRepository.findByName("hyo"));
+
+        System.out.println("findByEmail : " + userRepository.findByEmail("devhello940112@gmail.com"));
+        System.out.println("getByEmail : " + userRepository.getByEmail("devhello940112@gmail.com"));
+        System.out.println("readByEmail : " + userRepository.readByEmail("devhello940112@gmail.com"));
+        System.out.println("queryByEmail : " + userRepository.queryByEmail("devhello940112@gmail.com"));
+        System.out.println("searchByEmail : " + userRepository.searchByEmail("devhello940112@gmail.com"));
+        System.out.println("streamByEmail : " + userRepository.streamByEmail("devhello940112@gmail.com"));
+        System.out.println("findUsersByEmail : " + userRepository.findUsersByEmail("devhello940112@gmail.com"));
+        System.out.println("====================");
+        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("jae"));
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("jae"));
+        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("jae"));*/
+
+        System.out.println("findMyEmailAndName : " + userRepository.findByEmailAndName("devhello940112@gmail.com", "jae"));
+        System.out.println("findMyEmailOrName : " + userRepository.findByEmailOrName("devhello940112@gmail.com", "hyo"));
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
+        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L)));
+        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
+        System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L, 3L));
+
+
+
+    }
+
+    @Test
     void crud(){    // create, read, update, delete
 
+        /*
         // update
         userRepository.save(new Users("david", "david@gmail.com"));
 
@@ -40,6 +72,7 @@ class UserRepositoryTest {
         userRepository.save(user);
         userRepository.findAll().forEach(System.out::println);
 
+         */
 
         /*
         userRepository.findAll().forEach(System.out::println);
