@@ -55,6 +55,18 @@ class UserRepositoryTest {
         System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
         System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L, 3L));
 
+        System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());
+        //System.out.println("findByIdIsNotEmpty : " + userRepository.findByAddressesIsNotEmpty());
+
+        System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("jae", "hyo")));
+
+        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("ja"));
+        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("ae"));
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("a"));
+
+        System.out.println("findByNameLike : " + userRepository.findByNameLike("%j%"));
+
+
 
 
     }

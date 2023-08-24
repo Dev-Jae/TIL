@@ -2,11 +2,11 @@ package com.fastcampus.jpa.bookmanager.domain;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.springframework.data.repository.cdi.Eager;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * packageName : com.fastcampus.jpa.bookmanager.domain
@@ -38,4 +38,7 @@ public class Users {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Address> addresses;
 }

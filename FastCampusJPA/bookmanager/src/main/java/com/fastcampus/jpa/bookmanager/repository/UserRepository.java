@@ -22,6 +22,10 @@ import java.util.Set;
 public interface UserRepository extends JpaRepository<Users, Long> {
     Set<Users> findByName(String name);
 
+    Set<Users> findUsersByNameIs(String name);
+    Set<Users> findUsersByName(String name);
+    Set<Users> findUsersByEquals(String name);
+
     Users findByEmail(String email);
 
     Users getByEmail(String email);
@@ -58,6 +62,18 @@ public interface UserRepository extends JpaRepository<Users, Long> {
     List<Users> findByIdBetween(Long id1, Long id2);
 
     List<Users> findByIdGreaterThanEqualAndIdLessThanEqual(Long id1, Long id2);
+
+    List<Users> findByIdIsNotNull();
+
+    //List<Users> findByAddressesIsNotEmpty();    // name is not null and name != '' ??
+
+    List<Users> findByNameIn(List<String> names);
+
+    List<Users> findByNameStartingWith(String name);
+    List<Users> findByNameEndingWith(String name);
+    List<Users> findByNameContains(String name);
+
+    List<Users> findByNameLike(String name);
 
 
 }
