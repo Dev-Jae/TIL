@@ -30,6 +30,18 @@ class UserRepositoryTest {
     private UserRepository userRepository;  // 의존성 추가
 
     @Test
+    void pagingAndSortingTest(){
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("jae"));
+
+        System.out.println("findTopByNameOrderByIdDesc : " + userRepository.findTopByNameOrderByIdDesc("jae"));
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("jae"));
+
+        System.out.println("findFirstByName : " + userRepository.findFirstByName("jae", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+
+
+    }
+
+    @Test
     void select(){
 /*        System.out.println(userRepository.findByName("hyo"));
 
@@ -65,9 +77,6 @@ class UserRepositoryTest {
         System.out.println("findByNameContains : " + userRepository.findByNameContains("a"));
 
         System.out.println("findByNameLike : " + userRepository.findByNameLike("%j%"));
-
-
-
 
     }
 

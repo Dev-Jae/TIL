@@ -1,6 +1,7 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
 import com.fastcampus.jpa.bookmanager.domain.Users;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -24,7 +25,6 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     Set<Users> findUsersByNameIs(String name);
     Set<Users> findUsersByName(String name);
-    Set<Users> findUsersByEquals(String name);
 
     Users findByEmail(String email);
 
@@ -75,6 +75,10 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     List<Users> findByNameLike(String name);
 
+    List<Users> findTopByNameOrderByIdDesc(String name);
 
+    List<Users> findFirstByNameOrderByIdDescEmailAsc(String name);
+
+    List<Users> findFirstByName(String name, Sort sort);
 }
 
