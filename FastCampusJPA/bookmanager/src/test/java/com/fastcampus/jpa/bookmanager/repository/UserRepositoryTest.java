@@ -38,7 +38,7 @@ class UserRepositoryTest {
 
         System.out.println("findFirstByName : " + userRepository.findFirstByName("jae", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
 
-
+        System.out.println("findByNameWithPaging : " + userRepository.findByName("jae", PageRequest.of(0, 1, Sort.by(Sort.Order.desc("id")))).getTotalElements());
     }
 
     @Test
