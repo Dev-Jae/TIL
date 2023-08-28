@@ -1,5 +1,6 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
+import com.fastcampus.jpa.bookmanager.domain.Gender;
 import com.fastcampus.jpa.bookmanager.domain.Users;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,34 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;  // 의존성 추가
+
+    @Test
+    void enumTest(){
+        Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        users.setGender(Gender.MALE);
+
+        userRepository.save(users);
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRawRecord().get("gender"));
+
+    }
+
+    @Test
+    void insertAndUpdateTest(){
+        Users users = new Users();
+        users.setName("jae");
+        users.setEmail("jae2@gmail.com");
+
+        userRepository.save(users);
+
+        Users users2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        users2.setName("jaaaaae");
+
+        userRepository.save(users2);
+
+        System.out.println("user : " + userRepository.findAll());
+    }
 
     @Test
     void pagingAndSortingTest(){
