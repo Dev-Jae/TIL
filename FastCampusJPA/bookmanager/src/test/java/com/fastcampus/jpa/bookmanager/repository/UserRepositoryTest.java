@@ -31,6 +31,45 @@ class UserRepositoryTest {
     private UserRepository userRepository;  // 의존성 추가
 
     @Test
+    void preUpdateTest(){
+        Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is : " + users);
+
+        users.setName("jae22");
+        userRepository.save(users);
+
+        System.out.println("to-be : " + userRepository.findAll().get(0));
+    }
+
+    @Test
+    void prePersistTest(){
+        Users users = new Users();
+        users.setEmail("jae2@gmail.com");
+        users.setName("jae");
+//        users.setCreatedAt(LocalDateTime.now());
+//        users.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(users);
+        System.out.println(userRepository.findByEmail("jae2@gmail.com"));
+    }
+
+    @Test
+    void listenerTest(){
+        Users users = new Users();
+        users.setEmail("jae2@gmail.com");
+        users.setName("jae");
+
+        userRepository.save(users);
+
+        Users users2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        users2.setName("jaaaaaaae");
+        userRepository.save(users2);
+
+        userRepository.deleteById(4L);
+    }
+
+    @Test
     void enumTest(){
         Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
         users.setGender(Gender.MALE);

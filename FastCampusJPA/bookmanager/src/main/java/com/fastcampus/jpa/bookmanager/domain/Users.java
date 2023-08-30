@@ -25,7 +25,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Users {
+@EntityListeners(value = MyEntityListener.class)
+public class Users implements Auditable{
     @Id                 // PK 값
     @GeneratedValue     // JPA가 테이블의 기본키 값을 자동으로 생성해주는 어노테이션(자동생성 전략 지정)
     private long id;
@@ -42,7 +43,7 @@ public class Users {
     @Column(updatable = false)  // update시 할지 말지
     private LocalDateTime createdAt;
 
-    @Column(insertable = false) // insert시 할지 말지
+    //@Column(insertable = false) // insert시 할지 말지
     private LocalDateTime updatedAt;
 
     @Transient  // 영속성 처리 제외, DB데이터에 반영되지 않음
@@ -51,4 +52,17 @@ public class Users {
 
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private List<Address> addresses;
+
+/*    @PrePersist
+    public void prePersist(){
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        this.updatedAt = LocalDateTime.now();
+    }*/
+
+
 }
