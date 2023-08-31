@@ -30,6 +30,24 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;  // 의존성 추가
 
+    @Autowired
+    private UsersHistoryRepository usersHistoryRepository;
+
+    @Test
+    void usersHistoryTest(){
+        Users users = new Users();
+        users.setEmail("jae-new@gmail.com");
+        users.setName("jae-new");
+
+        userRepository.save(users);
+
+        users.setName("jae-new-new");
+
+        userRepository.save(users);
+
+        usersHistoryRepository.findAll().forEach(System.out::println);
+    }
+
     @Test
     void preUpdateTest(){
         Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);

@@ -1,9 +1,9 @@
-package com.fastcampus.jpa.bookmanager.domain;
+package com.fastcampus.jpa.bookmanager.domain.listener;
 
 import java.time.LocalDateTime;
 
 /**
- * packageName : com.fastcampus.jpa.bookmanager.domain
+ * packageName : com.fastcampus.jpa.bookmanager.domain.listener
  * fileName : Auditable
  * description :
  * ==========================================================
