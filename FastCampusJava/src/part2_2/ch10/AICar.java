@@ -26,4 +26,6 @@ public class AICar extends Car{
         System.out.println("자동차가 스스로 ");
     }
 
+
+
 }
