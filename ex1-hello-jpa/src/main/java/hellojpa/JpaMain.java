@@ -15,12 +15,11 @@ public class JpaMain {
         tx.begin();
 
         try {
+            // 영속
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ");
 
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
-
-            System.out.println("findMember id : " + findMember.getId());
-            System.out.println("findMember name : " + findMember.getName());
+            System.out.println("==================");
 
 //            // JPQL
 //            List<Member> result = em.createQuery("select m from Member as m", Member.class)
