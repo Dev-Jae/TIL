@@ -9,13 +9,18 @@ import java.util.Date;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "USERNAME")
     private String username;
 
-    public Member(){
-    }
+//    @Column(name = "TEAM_ID")
+//    private  Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public Long getId() {
         return id;
@@ -32,6 +37,22 @@ public class Member {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+//    public void changeTeam(Team team) {
+//        this.team = team;
+//
+//        // 연관관계 편의 메소드
+//        // 역방향(주인이 아닌 방향)만 연관관계 설정
+//        team.getMembers().add(this);
+//    }
 
     /*
     private Integer age;
