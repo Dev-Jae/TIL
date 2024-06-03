@@ -15,10 +15,30 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("JPA 강의");
+            // 팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
+            // 회원 저장
+            Member member = new Member();
+            member.setUsername("member1");
+            //member.changeTeam(team);
             em.persist(member);
+
+            team.addMember(member);
+
+//            em.flush();
+//            em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+
+            System.out.println("=================");
+            for ( Member m : members ) {
+                System.out.println("m = " + m.getUsername());
+            }
+            System.out.println("=================");
 
             tx.commit();
         } catch (Exception e){
