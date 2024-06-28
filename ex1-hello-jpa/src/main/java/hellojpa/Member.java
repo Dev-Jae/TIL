@@ -18,6 +18,14 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
+    // 기간 Peroid
+    @Embedded
+    private Peroid workPeroid;
+
+    // 주소
+    @Embedded
+    private Address homeAddress;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Team team;
