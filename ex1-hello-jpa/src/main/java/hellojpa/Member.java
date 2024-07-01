@@ -26,6 +26,8 @@ public class Member extends BaseEntity {
     @Embedded
     private Address homeAddress;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Team team;
@@ -59,6 +61,14 @@ public class Member extends BaseEntity {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
 //    public void changeTeam(Team team) {
