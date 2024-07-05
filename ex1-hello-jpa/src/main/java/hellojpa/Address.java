@@ -2,6 +2,8 @@ package hellojpa;
 
 import jakarta.persistence.Embeddable;
 
+import java.util.Objects;
+
 @Embeddable
 public class Address {
     private String city;
@@ -30,4 +32,20 @@ public class Address {
     }
 
     // Setter를 지우거나 private로 설정하여 불변 객체로 만들면 공유 참조 부작용을 피할 수 있음
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) &&
+                Objects.equals(street, address.street) &&
+                Objects.equals(zipcode, address.zipcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, zipcode);
+    }
 }

@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Member extends BaseEntity {
@@ -26,18 +24,34 @@ public class Member extends BaseEntity {
     @Embedded
     private Address homeAddress;
 
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+        @JoinColumn(name = "MEMBER_ID")
+    )
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS", joinColumns =
+//        @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Team team;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+//    @OneToOne
+//    @JoinColumn(name = "LOCKER_ID")
+//    private Locker locker;
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -71,7 +85,31 @@ public class Member extends BaseEntity {
         this.homeAddress = homeAddress;
     }
 
-//    public void changeTeam(Team team) {
+    public Peroid getWorkPeroid() {
+        return workPeroid;
+    }
+
+    public void setWorkPeroid(Peroid workPeroid) {
+        this.workPeroid = workPeroid;
+    }
+
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public List<AddressEntity> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
+        this.addressHistory = addressHistory;
+    }
+
+    //    public void changeTeam(Team team) {
 //        this.team = team;
 //
 //        // 연관관계 편의 메소드
