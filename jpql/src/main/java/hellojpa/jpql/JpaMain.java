@@ -15,16 +15,25 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
+            member.setTeam(team);
+
             em.persist(member);
 
+            em.flush();
+            em.clear();
+
             // 파라미터 바인딩
-            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                    .setParameter("username", "member1")
-                    .getSingleResult();
-            System.out.println("result = " + result.getUsername());
+            String query = "select m from Member m left join m.team t";
+            List<Member> resultList = em.createQuery(query, Member.class)
+                    .getResultList();
+
 
             tx.commit();
         } catch (Exception e){
