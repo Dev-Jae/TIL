@@ -10,6 +10,9 @@ public class Member {
     private String username;
     private int age;
 
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
+
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
@@ -38,5 +41,21 @@ public class Member {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public MemberType getType() {
+        return type;
+    }
+
+    public void setType(MemberType type) {
+        this.type = type;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

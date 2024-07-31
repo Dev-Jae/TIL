@@ -18,13 +18,24 @@ public class JpaMain {
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
+            member.setType(MemberType.ADMIN);
+
             em.persist(member);
 
+            em.flush();
+            em.clear();
+
             // 파라미터 바인딩
-            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                    .setParameter("username", "member1")
-                    .getSingleResult();
-            System.out.println("result = " + result.getUsername());
+            String query = "select m.username, 'HELLO', TRUE from Member m " +
+                            "where m.type = hellojpa.jpql.MemberType.ADMIN";
+            List<Object[]> result = em.createQuery(query)
+                    .getResultList();
+
+            for (Object[] objects : result) {
+                System.out.println("objects = " + objects[0]);
+                System.out.println("objects = " + objects[1]);
+                System.out.println("objects = " + objects[2]);
+            }
 
             tx.commit();
         } catch (Exception e){
