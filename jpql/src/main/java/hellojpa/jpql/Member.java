@@ -14,10 +14,14 @@ public class Member {
     private MemberType type;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+    public void changeTeam(Team team){
+        this.team = team;
+        team.getMembers().add(this);
+    }
 
     public Long getId() {
         return id;
@@ -51,6 +55,7 @@ public class Member {
         this.type = type;
     }
 
+
     public Team getTeam() {
         return team;
     }
@@ -58,4 +63,6 @@ public class Member {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+
 }
