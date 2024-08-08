@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Team {
     private Long id;
     private String name;
 
+    //@BatchSize(size = 5)    // BatchSize를 사용하면 페치 조인을 사용하지 않아도 in 쿼리로 가져온다.
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
 
