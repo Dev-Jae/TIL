@@ -13,6 +13,9 @@ target/
 classes/
 META-INF/
 
+# queryDsl Q file #
+/src/main/generated/
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
