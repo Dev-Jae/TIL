@@ -1,10 +1,9 @@
 package hellojpa.jpql;
 
-import jakarta.persistence.*;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 
 public class JpaMain {
 
@@ -41,21 +40,18 @@ public class JpaMain {
             em.persist(member3);
 
 
-            em.flush();
-            em.clear();
+//            em.flush();
+//            em.clear();
 
             // 파라미터 바인딩
-            String query = "select t from Team t join fetch t.members";
+            // FLUSH 자동 호출(벌크연산)
+            int resultCount = em.createQuery("update Member m set m.age = 21")
+                    .executeUpdate();
 
-            List<Team> resultList = em.createQuery(query, Team.class)
-                    .getResultList();
+            em.clear();
 
-            for (Team team : resultList) {
-                System.out.println("team = " + team.getName() + " | members = " + team.getMembers().size());
-                for ( Member member : team.getMembers()){
-                    System.out.println("-> member = " + member);
-                }
-            }
+            Member member = em.find(Member.class, member1.getId());
+            System.out.println("member.getAge() = " + member.getAge());
 
             tx.commit();
         } catch (Exception e){
